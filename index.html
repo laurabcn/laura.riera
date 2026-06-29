@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laura Riera — Senior Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1117;
+    --bg-raised:#111722;
+    --bg-card:#151B26;
+    --line:#1F2937;
+    --line-soft:#1A2230;
+    --text:#E6EDF3;
+    --text-dim:#8B949E;
+    --text-faint:#5B6573;
+    --accent:#58A6FF;
+    --accent-dim:#2D5C8C;
+    --ok:#7EE787;
+    --amber:#E3B341;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity:0.35;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(13,17,23,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
+  .nav-logo{font-family:var(--mono); font-weight:700; font-size:14px; color:var(--text);}
+  .nav-logo span{color:var(--accent);}
+  .nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim);}
+  .nav-links a{color:var(--text-dim);}
+  .nav-links a:hover{color:var(--accent); text-decoration:none;}
+  @media (max-width:680px){ .nav-links{display:none;} }
+
+  .lang-switch{display:flex; gap:4px; font-family:var(--mono); font-size:12px;}
+  .lang-switch a{
+    color:var(--text-faint); padding:4px 8px; border:1px solid var(--line); border-radius:3px;
+  }
+  .lang-switch a.active{color:var(--accent); border-color:var(--accent-dim); background:rgba(88,166,255,0.06);}
+  .lang-switch a:hover{color:var(--accent); text-decoration:none;}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:88px 0 64px; border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--ok); margin-bottom:18px; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{content:"●"; font-size:9px; color:var(--ok);}
+
+  h1{
+    font-family:var(--mono); font-weight:800; font-size:clamp(34px,5.5vw,56px);
+    line-height:1.08; letter-spacing:-0.01em; color:var(--text); margin-bottom:18px;
+  }
+  h1 .accent{color:var(--accent);}
+
+  .hero-sub{
+    font-size:17px; color:var(--text-dim); max-width:620px; margin-bottom:28px;
+  }
+
+  .stack-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:36px;}
+  .tag{
+    font-family:var(--mono); font-size:12.5px; color:var(--ok);
+    border:1px solid var(--accent-dim); background:rgba(88,166,255,0.06);
+    padding:5px 11px; border-radius:3px;
+  }
+
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; font-weight:500;
+    padding:11px 20px; border-radius:4px; border:1px solid var(--line);
+    color:var(--text); display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--accent); border-color:var(--accent); color:#06121F; font-weight:700;}
+  .btn-primary:hover{background:#7CB8FF; text-decoration:none;}
+  .btn:not(.btn-primary):hover{border-color:var(--accent); color:var(--accent); text-decoration:none;}
+
+  /* ---------- ARCHITECTURE DIAGRAM ---------- */
+  .diagram-section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .section-label{
+    font-family:var(--mono); font-size:12px; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;
+  }
+  .section-title{font-family:var(--mono); font-weight:700; font-size:22px; margin-bottom:28px; color:var(--text);}
+
+  .diagram{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:6px;
+    padding:36px 24px; overflow-x:auto;
+  }
+  .flow{
+    display:flex; align-items:center; gap:0; min-width:680px; justify-content:space-between;
+  }
+  .node{
+    font-family:var(--mono); font-size:12.5px; text-align:center;
+    border:1px solid var(--accent-dim); border-radius:5px;
+    padding:14px 10px; min-width:108px; background:var(--bg-raised);
+    color:var(--text); position:relative;
+  }
+  .node strong{display:block; color:var(--accent); font-size:13px; margin-bottom:3px;}
+  .node small{display:block; color:var(--text-faint); font-size:10.5px; margin-top:3px;}
+  .node.event{border-color:#5C4A1E; background:rgba(227,179,65,0.05);}
+  .node.event strong{color:var(--amber);}
+  .arrow{color:var(--text-faint); font-family:var(--mono); font-size:18px; padding:0 6px; flex-shrink:0;}
+  .diagram-caption{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-top:20px; text-align:center;
+  }
+
+  /* ---------- ADR (case studies) ---------- */
+  .adr-section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .adr{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:6px;
+    margin-bottom:20px; overflow:hidden;
+  }
+  .adr-head{
+    padding:18px 22px; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;
+  }
+  .adr-id{font-family:var(--mono); font-size:11.5px; color:var(--text-faint);}
+  .adr-status{
+    font-family:var(--mono); font-size:11px; color:var(--ok);
+    border:1px solid #2D5C3F; padding:2px 9px; border-radius:3px; background:rgba(126,231,135,0.06);
+  }
+  .adr-title{font-family:var(--mono); font-weight:700; font-size:16px; color:var(--text); flex:1; min-width:200px;}
+  .adr-body{padding:20px 22px;}
+  .adr-field{margin-bottom:16px;}
+  .adr-field:last-child{margin-bottom:0;}
+  .adr-field-label{
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;
+  }
+  .adr-field p{font-size:14.5px; color:var(--text-dim);}
+
+  /* ---------- TRAJECTORY / TIMELINE ---------- */
+  .timeline-section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .tl-item{
+    display:grid; grid-template-columns:130px 1fr; gap:20px;
+    padding:18px 0; border-bottom:1px solid var(--line-soft);
+  }
+  .tl-item:last-child{border-bottom:none;}
+  .tl-date{font-family:var(--mono); font-size:12.5px; color:var(--text-faint); padding-top:2px;}
+  .tl-role{font-family:var(--mono); font-weight:700; font-size:15px; color:var(--text); margin-bottom:3px;}
+  .tl-company{font-size:13.5px; color:var(--accent); margin-bottom:6px;}
+  .tl-desc{font-size:13.5px; color:var(--text-dim);}
+
+  /* ---------- MENTORING ---------- */
+  .mentor-section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .mentor-box{
+    display:grid; grid-template-columns:auto 1fr; gap:20px;
+    background:var(--bg-card); border:1px solid var(--line); border-radius:6px; padding:26px;
+  }
+  .mentor-icon{
+    font-family:var(--mono); font-size:22px; color:var(--accent);
+    border:1px solid var(--accent-dim); border-radius:6px; width:48px; height:48px;
+    display:flex; align-items:center; justify-content:center; background:rgba(88,166,255,0.06);
+  }
+  .mentor-box h3{font-family:var(--mono); font-size:15.5px; margin-bottom:8px; color:var(--text);}
+  .mentor-box p{font-size:14px; color:var(--text-dim);}
+
+  /* ---------- SKILLS GRID ---------- */
+  .skills-section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  @media (max-width:680px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-cat{background:var(--bg-card); padding:18px 20px;}
+  .skill-cat-label{font-family:var(--mono); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;}
+  .skill-items{display:flex; flex-wrap:wrap; gap:6px;}
+  .skill-chip{font-family:var(--mono); font-size:12px; color:var(--text-dim); background:var(--bg-raised); padding:4px 9px; border-radius:3px; border:1px solid var(--line);}
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  footer{padding:72px 0 56px; text-align:center;}
+  footer h2{font-family:var(--mono); font-weight:800; font-size:clamp(24px,4vw,34px); margin-bottom:14px;}
+  footer p{color:var(--text-dim); margin-bottom:30px; font-size:15px;}
+  .contact-row{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+  .footer-meta{font-family:var(--mono); font-size:11.5px; color:var(--text-faint);}
+
+  @media (max-width:680px){
+    .flow{flex-direction:column; min-width:auto;}
+    .arrow{transform:rotate(90deg);}
+    .adr-head{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-logo">laura<span>.</span>riera</div>
+    <div class="nav-links">
+      <a href="#arquitectura">Arquitectura</a>
+      <a href="#casos">Casos</a>
+      <a href="#trajectoria">Trajectòria</a>
+      <a href="#mentoria">Mentoria</a>
+      <a href="#contacte">Contacte</a>
+    </div>
+    <div class="lang-switch">
+      <a href="index.html" class="active">CA</a>
+      <a href="es.html">ES</a>
+      <a href="en.html">EN</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Disponible — 100% remot</div>
+    <h1>Backend que pensa en<br>bounded contexts,<br><span class="accent">no en endpoints.</span></h1>
+    <p class="hero-sub">Laura Riera — Senior PHP Developer. +10 anys dissenyant sistemes amb DDD, arquitectura hexagonal, CQRS i Event Sourcing. De monòlits a esdeveniments, sense perdre la traçabilitat.</p>
+    <div class="stack-row">
+      <span class="tag">PHP 8.3+</span>
+      <span class="tag">Symfony</span>
+      <span class="tag">DDD / Hexagonal</span>
+      <span class="tag">CQRS</span>
+      <span class="tag">Event Sourcing</span>
+      <span class="tag">Kafka</span>
+      <span class="tag">AWS · EKS</span>
+      <span class="tag">Kubernetes</span>
+    </div>
+    <div class="hero-actions">
+      <a href="mailto:laurariera9@gmail.com" class="btn btn-primary">→ Escriu-me</a>
+      <a href="#casos" class="btn">Veure casos d'arquitectura</a>
+      <a href="Laura_Riera_CV.pdf" class="btn">↓ Descarregar CV</a>
+    </div>
+  </div>
+</header>
+
+<section class="diagram-section" id="arquitectura">
+  <div class="wrap">
+    <div class="section-label">Com treballa</div>
+    <div class="section-title">El flux que repeteix a cada bounded context</div>
+    <div class="diagram">
+      <div class="flow">
+        <div class="node"><strong>Command</strong>API / UI<small>intenció</small></div>
+        <div class="arrow">→</div>
+        <div class="node"><strong>Bus</strong>Symfony Messenger<small>encaminament</small></div>
+        <div class="arrow">→</div>
+        <div class="node"><strong>Handler</strong>Domain logic<small>hexagonal core</small></div>
+        <div class="arrow">→</div>
+        <div class="node event"><strong>Event Store</strong>+ snapshots<small>persistència</small></div>
+        <div class="arrow">→</div>
+        <div class="node event"><strong>Kafka / SQS</strong>event streaming<small>altres contexts</small></div>
+      </div>
+      <div class="diagram-caption">Cada bounded context exposa només el seu domini; la comunicació entre contexts viaja per esdeveniments, no per crides directes.</div>
+    </div>
+  </div>
+</section>
+
+<section class="adr-section" id="casos">
+  <div class="wrap">
+    <div class="section-label">Decisions d'arquitectura</div>
+    <div class="section-title">Casos reals, format ADR</div>
+
+    <div class="adr">
+      <div class="adr-head">
+        <span class="adr-id">ADR-01 · THN (The Hotels Network)</span>
+        <span class="adr-status">En producció</span>
+      </div>
+      <div class="adr-title">Event Sourcing amb snapshots per garantir traçabilitat per bounded context</div>
+      <div class="adr-body">
+        <div class="adr-field">
+          <div class="adr-field-label">Context</div>
+          <p>Múltiples bounded contexts necessitaven un historial fiable de canvis de negoci i la capacitat de reconstruir l'estat en qualsevol moment, sense penalitzar el rendiment de lectura a mesura que creixia el volum d'events.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Decisió</div>
+          <p>Event store amb snapshots periòdics + CQRS, separant els buses de comandos, queries i esdeveniments amb Symfony Messenger. Streaming entre contexts via Kafka; AWS SQS amb dead-letter queues per a la resiliència en consums asíncrons.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Resultat</div>
+          <p>Reconstrucció d'estat auditable per a qualsevol entitat, desacoblament real entre contexts i menys incidents de "per què les dades no coincideixen" — el sistema explica per si mateix com s'ha arribat a un estat.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="adr">
+      <div class="adr-head">
+        <span class="adr-id">ADR-02 · THN (The Hotels Network)</span>
+        <span class="adr-status">En producció</span>
+      </div>
+      <div class="adr-title">Agents Claude Code per a auditoria de convencions i revisió de codi</div>
+      <div class="adr-body">
+        <div class="adr-field">
+          <div class="adr-field-label">Context</div>
+          <p>Mantenir consistència de convencions d'equip (PHPStan nivell 9, PSR-12, patrons DDD/hexagonal) a mesura que el codebase i l'equip creixien era cada cop més costós de revisar manualment.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Decisió</div>
+          <p>Disseny de skills i agents especialitzats amb Claude Code, amb integracions MCP, per automatitzar revisió de codi, auditoria de convencions i diagnòstic de dades abans que arribin a revisió humana.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Resultat</div>
+          <p>Menys temps de l'equip en revisions repetitives de forma/convenció, i revisions humanes centrades en disseny i lògica de negoci en lloc d'estil.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="adr">
+      <div class="adr-head">
+        <span class="adr-id">ADR-03 · Promofarma</span>
+        <span class="adr-status">Completat</span>
+      </div>
+      <div class="adr-title">CQRS + Event Sourcing en un sistema d'alt volum</div>
+      <div class="adr-body">
+        <div class="adr-field">
+          <div class="adr-field-label">Context</div>
+          <p>Dominis de negoci complexos amb alt volum de transaccions necessitaven separar clarament lectura i escriptura per mantenir consistència sense coll d'ampolla en les consultes.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Decisió</div>
+          <p>Modelatge amb Domain-Driven Design i implementació de CQRS, amb comunicació asíncrona entre serveis via Kafka dins d'una arquitectura orientada a microserveis.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Resultat</div>
+          <p>Traçabilitat de dades garantida i lectura/escriptura escalades de forma independent.</p>
+        </div>
+      </div>
+    </div>
+    <div class="adr">
+      <div class="adr-head">
+        <span class="adr-id">ADR-04 · Atrápalo / Drinks and Co</span>
+        <span class="adr-status">Completat</span>
+      </div>
+      <div class="adr-title">Refactor progressiu d'un monòlit cap a Domain-Driven Design</div>
+      <div class="adr-body">
+        <div class="adr-field">
+          <div class="adr-field-label">Context</div>
+          <p>Codebases en PHP 5, amb lògica de negoci fortament acoblada a la infraestructura i al framework, sense límits clars entre dominis, dificultaven l'evolució i el manteniment a mesura que el producte creixia.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Decisió</div>
+          <p>Procés progressiu en paral·lel a la migració de versió de PHP (5 → 7 → 8): extracció de la lògica de negoci de la infraestructura, identificació dels bounded contexts naturals dins del monòlit, i aplicació de bones pràctiques i clean code (tipat estricte, eliminació de codi mort, reducció d'acoblament) en cada mòdul migrat.</p>
+        </div>
+        <div class="adr-field">
+          <div class="adr-field-label">Resultat</div>
+          <p>Monòlit transformat de forma incremental cap a una arquitectura modular orientada a dominis, sobre una base de codi moderna i mantenible, sense talls de servei ni necessitat d'una reescriptura completa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mentor-section" id="mentoria">
+  <div class="wrap">
+    <div class="section-label">Equip</div>
+    <div class="section-title">Mentoria tècnica</div>
+    <div class="mentor-box">
+      <div class="mentor-icon">M</div>
+      <div>
+        <h3>Acompanyament a developers en l'adopció de DDD, hexagonal i CQRS</h3>
+        <p>A THN, part de la feina ha estat ajudar a l'equip a interioritzar els patrons d'arquitectura del codebase: revisar dissenys de bounded contexts amb developers més juniors, explicar el "per què" darrere de les convencions auditades pels agents de Claude Code, i acompanyar en la migració progressiva de PHPStan nivell 9. L'objectiu no és només que el codi passi la revisió, sinó que l'equip entengui el raonament que hi ha darrere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline-section" id="trajectoria">
+  <div class="wrap">
+    <div class="section-label">Trajectòria</div>
+    <div class="section-title">10+ anys construint backend</div>
+
+    <div class="tl-item">
+      <div class="tl-date">2021 — actualitat</div>
+      <div>
+        <div class="tl-role">Senior Backend Developer</div>
+        <div class="tl-company">THN (The Hotels Network) — adquirida per Lighthouse</div>
+        <div class="tl-desc">DDD, hexagonal, CQRS, Event Sourcing per bounded contexts. Kafka, AWS SQS, MongoDB, Redis, S3. Kubernetes/EKS, Helm, CircleCI. Disseny d'agents Claude Code per a revisió i convencions.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2020 — 2021</div>
+      <div>
+        <div class="tl-role">Backend Developer</div>
+        <div class="tl-company">Promofarma</div>
+        <div class="tl-desc">CQRS i Event Sourcing en sistema d'alt volum. DDD aplicat a dominis complexos. Microserveis amb Kafka.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2019 — 2020</div>
+      <div>
+        <div class="tl-role">Backend Developer</div>
+        <div class="tl-company">Drinks and Co</div>
+        <div class="tl-desc">PHP/Symfony. MySQL, MongoDB, RabbitMQ. Refactor de mòduls de negoci cap a Domain-Driven Design en paral·lel a la migració de PHP 7 a 8, aplicant bones pràctiques i clean code.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2018 — 2019</div>
+      <div>
+        <div class="tl-role">Backend Developer</div>
+        <div class="tl-company">Colvin</div>
+        <div class="tl-desc">CQRS i Event Sourcing per separar lectura i escriptura amb historial fiable de canvis.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2016 — 2018</div>
+      <div>
+        <div class="tl-role">Programadora Full Stack</div>
+        <div class="tl-company">Atrápalo — Ocio</div>
+        <div class="tl-desc">Principis DDD a les APIs de vols. RabbitMQ. Refactor progressiu d'un monòlit cap a Domain-Driven Design en paral·lel a la migració de PHP 5 a 7: separació de domini i infraestructura, bounded contexts i clean code.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2012 — 2016</div>
+      <div>
+        <div class="tl-role">Front-End / Full Stack</div>
+        <div class="tl-company">Underbike · Fujitsu Spain · IN2 · Consulnet · Espais Telemàtics</div>
+        <div class="tl-desc">AngularJS, Java, PHP. Inicis de carrera en consultoria i start-up.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills-section">
+  <div class="wrap">
+    <div class="section-label">Stack</div>
+    <div class="section-title">Competències tècniques</div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-label">Arquitectura</div>
+        <div class="skill-items">
+          <span class="skill-chip">DDD</span><span class="skill-chip">Hexagonal</span><span class="skill-chip">CQRS</span><span class="skill-chip">Event Sourcing</span><span class="skill-chip">Bounded Contexts</span><span class="skill-chip">Microserveis</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Llenguatges i frameworks</div>
+        <div class="skill-items">
+          <span class="skill-chip">PHP 8.3+</span><span class="skill-chip">Symfony 6.4</span><span class="skill-chip">TypeScript</span><span class="skill-chip">Java</span><span class="skill-chip">Go</span><span class="skill-chip">GraphQL</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Missatgeria i streaming</div>
+        <div class="skill-items">
+          <span class="skill-chip">Symfony Messenger</span><span class="skill-chip">Apache Kafka</span><span class="skill-chip">AWS SQS</span><span class="skill-chip">RabbitMQ</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Dades i emmagatzematge</div>
+        <div class="skill-items">
+          <span class="skill-chip">MongoDB</span><span class="skill-chip">MySQL</span><span class="skill-chip">Elasticsearch</span><span class="skill-chip">Redis</span><span class="skill-chip">AWS S3</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Cloud i infraestructura</div>
+        <div class="skill-items">
+          <span class="skill-chip">AWS</span><span class="skill-chip">Kubernetes</span><span class="skill-chip">EKS</span><span class="skill-chip">Docker</span><span class="skill-chip">Helm</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">CI/CD, qualitat i IA</div>
+        <div class="skill-items">
+          <span class="skill-chip">CircleCI</span><span class="skill-chip">PHPStan L9</span><span class="skill-chip">Datadog</span><span class="skill-chip">LaunchDarkly</span><span class="skill-chip">Claude Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacte">
+  <div class="wrap">
+    <h2>Construïm el següent bounded context?</h2>
+    <p>Disponible 100% remot · Barcelona (08035)</p>
+    <div class="contact-row">
+      <a href="mailto:laurariera9@gmail.com" class="btn btn-primary">→ laurariera9@gmail.com</a>
+      <a href="tel:669954889" class="btn">669 954 889</a>
+    </div>
+    <div class="footer-meta">Català i Castellà (natiu) · Anglès (B1)</div>
+  </div>
+</footer>
+
+</body>
+</html>
