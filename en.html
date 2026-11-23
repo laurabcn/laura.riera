@@ -3,234 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laura Riera — Senior Backend Developer</title>
+<title>Laura Riera — Senior Software Developer</title>
+<meta name="description" content="Laura Riera, Senior Software Developer in Barcelona. Backend architecture (DDD, event-driven, CQRS, Event Sourcing) and applied AI: agents, RAG and spec-driven workflows.">
+<link rel="canonical" href="https://laurabcn.github.io/laura.riera/en.html">
+<link rel="alternate" hreflang="ca" href="https://laurabcn.github.io/laura.riera/ca.html"><link rel="alternate" hreflang="es" href="https://laurabcn.github.io/laura.riera/es.html"><link rel="alternate" hreflang="en" href="https://laurabcn.github.io/laura.riera/en.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Laura Riera — Senior Software Developer">
+<meta property="og:description" content="Laura Riera, Senior Software Developer in Barcelona. Backend architecture (DDD, event-driven, CQRS, Event Sourcing) and applied AI: agents, RAG and spec-driven workflows.">
+<meta property="og:url" content="https://laurabcn.github.io/laura.riera/en.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0D1117;
-    --bg-raised:#111722;
-    --bg-card:#151B26;
-    --line:#1F2937;
-    --line-soft:#1A2230;
-    --text:#E6EDF3;
-    --text-dim:#8B949E;
-    --text-faint:#5B6573;
-    --accent:#58A6FF;
-    --accent-dim:#2D5C8C;
-    --ok:#7EE787;
-    --amber:#E3B341;
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'Inter', sans-serif;
-  }
-
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  body::before{
-    content:"";
-    position:fixed; inset:0;
-    background-image:
-      linear-gradient(var(--line-soft) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-    background-size: 64px 64px;
-    opacity:0.35;
-    pointer-events:none;
-    z-index:0;
-  }
-
-  .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
-
-  a{color:var(--accent); text-decoration:none;}
-  a:hover{text-decoration:underline;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
-
-  /* ---------- NAV ---------- */
-  nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(13,17,23,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
-  .nav-logo{font-family:var(--mono); font-weight:700; font-size:14px; color:var(--text);}
-  .nav-logo span{color:var(--accent);}
-  .nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim);}
-  .nav-links a{color:var(--text-dim);}
-  .nav-links a:hover{color:var(--accent); text-decoration:none;}
-  @media (max-width:680px){ .nav-links{display:none;} }
-
-  .lang-switch{display:flex; gap:4px; font-family:var(--mono); font-size:12px;}
-  .lang-switch a{
-    color:var(--text-faint); padding:4px 8px; border:1px solid var(--line); border-radius:3px;
-  }
-  .lang-switch a.active{color:var(--accent); border-color:var(--accent-dim); background:rgba(88,166,255,0.06);}
-  .lang-switch a:hover{color:var(--accent); text-decoration:none;}
-
-  /* ---------- HERO ---------- */
-  header.hero{padding:88px 0 64px; border-bottom:1px solid var(--line);}
-  .eyebrow{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--ok); margin-bottom:18px; display:flex; align-items:center; gap:8px;
-  }
-  .eyebrow::before{content:"●"; font-size:9px; color:var(--ok);}
-
-  h1{
-    font-family:var(--mono); font-weight:800; font-size:clamp(34px,5.5vw,56px);
-    line-height:1.08; letter-spacing:-0.01em; color:var(--text); margin-bottom:18px;
-  }
-  h1 .accent{color:var(--accent);}
-
-  .hero-sub{
-    font-size:17px; color:var(--text-dim); max-width:620px; margin-bottom:28px;
-  }
-
-  .stack-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:36px;}
-  .tag{
-    font-family:var(--mono); font-size:12.5px; color:var(--ok);
-    border:1px solid var(--accent-dim); background:rgba(88,166,255,0.06);
-    padding:5px 11px; border-radius:3px;
-  }
-
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{
-    font-family:var(--mono); font-size:13.5px; font-weight:500;
-    padding:11px 20px; border-radius:4px; border:1px solid var(--line);
-    color:var(--text); display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn-primary{background:var(--accent); border-color:var(--accent); color:#06121F; font-weight:700;}
-  .btn-primary:hover{background:#7CB8FF; text-decoration:none;}
-  .btn:not(.btn-primary):hover{border-color:var(--accent); color:var(--accent); text-decoration:none;}
-
-  /* ---------- ARCHITECTURE DIAGRAM ---------- */
-  .diagram-section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .section-label{
-    font-family:var(--mono); font-size:12px; color:var(--text-faint);
-    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;
-  }
-  .section-title{font-family:var(--mono); font-weight:700; font-size:22px; margin-bottom:28px; color:var(--text);}
-
-  .diagram{
-    background:var(--bg-card); border:1px solid var(--line); border-radius:6px;
-    padding:36px 24px; overflow-x:auto;
-  }
-  .flow{
-    display:flex; align-items:center; gap:0; min-width:680px; justify-content:space-between;
-  }
-  .node{
-    font-family:var(--mono); font-size:12.5px; text-align:center;
-    border:1px solid var(--accent-dim); border-radius:5px;
-    padding:14px 10px; min-width:108px; background:var(--bg-raised);
-    color:var(--text); position:relative;
-  }
-  .node strong{display:block; color:var(--accent); font-size:13px; margin-bottom:3px;}
-  .node small{display:block; color:var(--text-faint); font-size:10.5px; margin-top:3px;}
-  .node.event{border-color:#5C4A1E; background:rgba(227,179,65,0.05);}
-  .node.event strong{color:var(--amber);}
-  .arrow{color:var(--text-faint); font-family:var(--mono); font-size:18px; padding:0 6px; flex-shrink:0;}
-  .diagram-caption{
-    font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-top:20px; text-align:center;
-  }
-
-  /* ---------- ADR (case studies) ---------- */
-  .adr-section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .adr{
-    background:var(--bg-card); border:1px solid var(--line); border-radius:6px;
-    margin-bottom:20px; overflow:hidden;
-  }
-  .adr-head{
-    padding:18px 22px; border-bottom:1px solid var(--line);
-    display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;
-  }
-  .adr-id{font-family:var(--mono); font-size:11.5px; color:var(--text-faint);}
-  .adr-status{
-    font-family:var(--mono); font-size:11px; color:var(--ok);
-    border:1px solid #2D5C3F; padding:2px 9px; border-radius:3px; background:rgba(126,231,135,0.06);
-  }
-  .adr-title{font-family:var(--mono); font-weight:700; font-size:16px; color:var(--text); flex:1; min-width:200px;}
-  .adr-body{padding:20px 22px;}
-  .adr-field{margin-bottom:16px;}
-  .adr-field:last-child{margin-bottom:0;}
-  .adr-field-label{
-    font-family:var(--mono); font-size:11px; color:var(--accent);
-    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;
-  }
-  .adr-field p{font-size:14.5px; color:var(--text-dim);}
-
-  /* ---------- TRAJECTORY / TIMELINE ---------- */
-  .timeline-section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .tl-item{
-    display:grid; grid-template-columns:130px 1fr; gap:20px;
-    padding:18px 0; border-bottom:1px solid var(--line-soft);
-  }
-  .tl-item:last-child{border-bottom:none;}
-  .tl-date{font-family:var(--mono); font-size:12.5px; color:var(--text-faint); padding-top:2px;}
-  .tl-role{font-family:var(--mono); font-weight:700; font-size:15px; color:var(--text); margin-bottom:3px;}
-  .tl-company{font-size:13.5px; color:var(--accent); margin-bottom:6px;}
-  .tl-desc{font-size:13.5px; color:var(--text-dim);}
-
-  /* ---------- MENTORING ---------- */
-  .mentor-section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .mentor-box{
-    display:grid; grid-template-columns:auto 1fr; gap:20px;
-    background:var(--bg-card); border:1px solid var(--line); border-radius:6px; padding:26px;
-  }
-  .mentor-icon{
-    font-family:var(--mono); font-size:22px; color:var(--accent);
-    border:1px solid var(--accent-dim); border-radius:6px; width:48px; height:48px;
-    display:flex; align-items:center; justify-content:center; background:rgba(88,166,255,0.06);
-  }
-  .mentor-box h3{font-family:var(--mono); font-size:15.5px; margin-bottom:8px; color:var(--text);}
-  .mentor-box p{font-size:14px; color:var(--text-dim);}
-
-  /* ---------- SKILLS GRID ---------- */
-  .skills-section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
-  @media (max-width:680px){.skills-grid{grid-template-columns:1fr;}}
-  .skill-cat{background:var(--bg-card); padding:18px 20px;}
-  .skill-cat-label{font-family:var(--mono); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;}
-  .skill-items{display:flex; flex-wrap:wrap; gap:6px;}
-  .skill-chip{font-family:var(--mono); font-size:12px; color:var(--text-dim); background:var(--bg-raised); padding:4px 9px; border-radius:3px; border:1px solid var(--line);}
-
-  /* ---------- FOOTER / CONTACT ---------- */
-  footer{padding:72px 0 56px; text-align:center;}
-  footer h2{font-family:var(--mono); font-weight:800; font-size:clamp(24px,4vw,34px); margin-bottom:14px;}
-  footer p{color:var(--text-dim); margin-bottom:30px; font-size:15px;}
-  .contact-row{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
-  .footer-meta{font-family:var(--mono); font-size:11.5px; color:var(--text-faint);}
-
-  @media (max-width:680px){
-    .flow{flex-direction:column; min-width:auto;}
-    .arrow{transform:rotate(90deg);}
-    .adr-head{flex-direction:column; align-items:flex-start;}
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
+<nav aria-label="Main navigation">
   <div class="wrap">
     <div class="nav-logo">laura<span>.</span>riera</div>
-    <div class="nav-links">
-      <a href="#architecture">Architecture</a>
-      <a href="#cases">Cases</a>
-      <a href="#career">Career</a>
-      <a href="#mentoring">Mentoring</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="lang-switch">
-      <a href="ca.html">CA</a>
-      <a href="es.html">ES</a>
-      <a href="en.html" class="active">EN</a>
+    <div class="nav-links"><a href="#architecture">Architecture</a><a href="#ai">AI</a><a href="#cases">Cases</a><a href="#mentoring">Mentoring</a><a href="#career">Career</a><a href="#contact">Contact</a></div>
+    <div class="nav-right">
+      <div class="nav-social">
+        <a href="https://www.linkedin.com/in/laurarv/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="https://github.com/laurabcn" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.22.69.83.57A12 12 0 0 0 12 .3"/></svg></a>
+      </div>
+      <div class="lang-switch"><a href="ca.html">CA</a><a href="es.html">ES</a><a href="en.html" class="active" aria-current="page">EN</a></div>
     </div>
   </div>
 </nav>
@@ -238,37 +38,30 @@
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Available — Remote or hybrid</div>
-    <h1>Backend engineering built around<br>bounded contexts,<br><span class="accent">not endpoints.</span></h1>
-    <p class="hero-sub">Laura Riera — Senior PHP Developer. 10+ years designing systems with DDD, hexagonal architecture, CQRS and Event Sourcing. From monoliths to events, without losing traceability.</p>
-    <div class="stack-row">
-      <span class="tag">PHP 8.3+</span>
-      <span class="tag">Symfony</span>
-      <span class="tag">DDD / Hexagonal</span>
-      <span class="tag">CQRS</span>
-      <span class="tag">Event Sourcing</span>
-      <span class="tag">Kafka</span>
-      <span class="tag">AWS · EKS</span>
-      <span class="tag">Kubernetes</span>
-    </div>
+    <h1>Systems that think in<br>bounded contexts,<br><span class="accent">and now in agents too.</span></h1>
+    <p class="hero-sub">Laura Riera — Senior Software Developer. 10+ years designing systems with DDD, hexagonal architecture, CQRS and Event Sourcing, and applying AI through agents, RAG and spec-driven workflows. From monoliths to events, without losing traceability.</p>
+    <div class="stack-row"><span class="tag">PHP</span><span class="tag">Python</span><span class="tag">DDD / Hexagonal</span><span class="tag">Event-driven</span><span class="tag">CQRS</span><span class="tag">Event Sourcing</span><span class="tag">Kafka</span><span class="tag">AWS · EKS</span><span class="tag">Claude Code</span><span class="tag">RAG</span></div>
     <div class="hero-actions">
       <a href="mailto:laurariera9@gmail.com" class="btn btn-primary">→ Get in touch</a>
       <a href="#cases" class="btn">View architecture cases</a>
       <a href="Laura_Riera_CV_EN.pdf" class="btn">↓ Download CV</a>
+      <a href="https://www.linkedin.com/in/laurarv/" class="btn btn-icon" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <a href="https://github.com/laurabcn" class="btn btn-icon" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.22.69.83.57A12 12 0 0 0 12 .3"/></svg></a>
     </div>
   </div>
 </header>
 
-<section class="diagram-section" id="architecture">
+<section id="architecture">
   <div class="wrap">
     <div class="section-label">How she works</div>
-    <div class="section-title">The flow repeated across every bounded context</div>
+    <h2 class="section-title">The flow repeated across every bounded context</h2>
     <div class="diagram">
       <div class="flow">
-        <div class="node"><strong>Command</strong>API / UI<small>intent</small></div>
+        <div class="node "><strong>Command</strong>API / UI<small>intent</small></div>
         <div class="arrow">→</div>
-        <div class="node"><strong>Bus</strong>Symfony Messenger<small>routing</small></div>
+        <div class="node "><strong>Bus</strong>Symfony Messenger<small>routing</small></div>
         <div class="arrow">→</div>
-        <div class="node"><strong>Handler</strong>Domain logic<small>hexagonal core</small></div>
+        <div class="node "><strong>Handler</strong>Domain logic<small>hexagonal core</small></div>
         <div class="arrow">→</div>
         <div class="node event"><strong>Event Store</strong>+ snapshots<small>persistence</small></div>
         <div class="arrow">→</div>
@@ -279,212 +72,143 @@
   </div>
 </section>
 
-<section class="adr-section" id="cases">
+<section id="ai">
+  <div class="wrap">
+    <div class="section-label">Applied AI</div>
+    <h2 class="section-title">The LLM proposes; checks and people decide</h2>
+    <p class="section-intro">I apply AI with the same discipline as architecture: a clear source of truth, isolated changes and human review before anything reaches the main branch.</p>
+    <div class="diagram">
+      <div class="flow">
+        <div class="node "><strong>Requirements</strong>from product<small>starting point</small></div>
+        <div class="arrow">→</div>
+        <div class="node ai"><strong>Spec</strong>+ tasks<small>source of truth</small></div>
+        <div class="arrow">→</div>
+        <div class="node ai"><strong>Branch</strong>agent changes<small>isolated</small></div>
+        <div class="arrow">→</div>
+        <div class="node "><strong>Review</strong>developer<small>human decision</small></div>
+        <div class="arrow">→</div>
+        <div class="node ai"><strong>Code review</strong>spec-driven<small>+ PHPStan &amp; tests</small></div>
+      </div>
+      <div class="diagram-caption">Spec-driven workflow with Claude Code agents: each spec generates its own branch, and nothing reaches main without review.</div>
+      <div class="legend"><span class="l-ai">AI step</span><span class="l-human">human or deterministic step</span></div>
+    </div>
+    <div class="cap-grid"><div class="cap"><h3>Agents and skills</h3><p>Claude Code skills, commands and agents with MCP integrations for code review, convention auditing and data diagnostics.</p></div><div class="cap"><h3>Spec-driven workflows</h3><p>From product requirements to specs, branches and spec-driven code review, with an agent that detects flaky tests.</p></div><div class="cap"><h3>RAG</h3><p>Product content generation with LLMs and RAG over our own data, in an asynchronous, retryable worker.</p></div><div class="cap"><h3>LLM integration</h3><p>Integrating AI model API clients into applications, with the same rigor as any other external service.</p></div></div>
+  </div>
+</section>
+
+<section id="cases">
   <div class="wrap">
     <div class="section-label">Architecture decisions</div>
-    <div class="section-title">Relevant cases, ADR format</div>
-
-    <div class="adr">
-      <div class="adr-head">
-        <span class="adr-id">ADR-01 · THN (The Hotels Network)</span>
-        <span class="adr-status">In production</span>
-      </div>
-      <div class="adr-title">Event Sourcing with snapshots to guarantee traceability per bounded context</div>
+    <h2 class="section-title">Relevant cases, ADR format</h2>
+    
+    <article class="adr">
+      <div class="adr-head"><span class="adr-id">ADR-01 · THN (The Hotels Network)</span></div>
+      <h3 class="adr-title">Event Sourcing with snapshots to guarantee traceability per bounded context</h3>
       <div class="adr-body">
-        <div class="adr-field">
-          <div class="adr-field-label">Context</div>
-          <p>Multiple bounded contexts needed a reliable history of business changes and the ability to reconstruct state at any point in time, without penalizing read performance as event volume grew.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Decision</div>
-          <p>Event store with periodic snapshots + CQRS, splitting command, query and event buses with Symfony Messenger. Cross-context streaming via Kafka; AWS SQS with dead-letter queues for resilience in async consumption.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Outcome</div>
-          <p>Auditable state reconstruction for any entity, real decoupling between contexts, and fewer "why don't the numbers match" incidents — the system explains for itself how a given state was reached.</p>
-        </div>
+        <div class="adr-field"><div class="adr-field-label">Context</div><p>Multiple bounded contexts needed a reliable history of business changes and the ability to reconstruct state at any point in time, without penalizing read performance as event volume grew.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Decision</div><p>Event store with periodic snapshots + CQRS, splitting command, query and event buses with Symfony Messenger. Cross-context streaming via Kafka; AWS SQS with dead-letter queues for resilience in async consumption.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Outcome</div><p>Auditable state reconstruction for any entity, real decoupling between contexts, and fewer &quot;why don&#x27;t the numbers match&quot; incidents — the system explains for itself how a given state was reached.</p></div>
       </div>
-    </div>
-
-    <div class="adr">
-      <div class="adr-head">
-        <span class="adr-id">ADR-02 · THN (The Hotels Network)</span>
-        <span class="adr-status">In production</span>
-      </div>
-      <div class="adr-title">Claude Code agents for convention auditing and code review</div>
+    </article>
+    <article class="adr">
+      <div class="adr-head"><span class="adr-id">ADR-02 · THN (The Hotels Network)</span><span class="adr-kind">AI</span></div>
+      <h3 class="adr-title">Claude Code agents for convention auditing and code review</h3>
       <div class="adr-body">
-        <div class="adr-field">
-          <div class="adr-field-label">Context</div>
-          <p>Keeping team conventions consistent (PHPStan level 9, PSR-12, DDD/hexagonal patterns) was becoming increasingly costly to review manually as the codebase and team grew.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Decision</div>
-          <p>Designed specialized skills and agents with Claude Code, with MCP integrations, to automate code review, convention auditing and data diagnostics before reaching human review.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Outcome</div>
-          <p>Less team time spent on repetitive style/convention reviews; human reviews focused on design and business logic rather than style.</p>
-        </div>
+        <div class="adr-field"><div class="adr-field-label">Context</div><p>Keeping team conventions consistent (PHPStan level 9, PSR-12, DDD/hexagonal patterns) was becoming increasingly costly to review manually as the codebase and team grew.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Decision</div><p>Designed specialized skills and agents with Claude Code, with MCP integrations, to automate code review, convention auditing and data diagnostics before reaching human review.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Outcome</div><p>Less team time spent on repetitive style/convention reviews; human reviews focused on design and business logic rather than style.</p></div>
       </div>
-    </div>
-
-    <div class="adr">
-      <div class="adr-head">
-        <span class="adr-id">ADR-03 · Promofarma</span>
-        <span class="adr-status">Completed</span>
-      </div>
-      <div class="adr-title">CQRS + Event Sourcing in a high-volume system</div>
+    </article>
+    <article class="adr">
+      <div class="adr-head"><span class="adr-id">ADR-03 · THN (The Hotels Network)</span><span class="adr-kind">AI</span></div>
+      <h3 class="adr-title">Spec-driven agent workflow: from requirements to code</h3>
       <div class="adr-body">
-        <div class="adr-field">
-          <div class="adr-field-label">Context</div>
-          <p>Complex business domains with high transaction volume needed to clearly separate reads and writes to maintain consistency without query bottlenecks.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Decision</div>
-          <p>Domain modeling with Domain-Driven Design and CQRS implementation, with asynchronous service-to-service communication via Kafka within a microservices-oriented architecture.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Outcome</div>
-          <p>Guaranteed data traceability, with reads and writes scaled independently.</p>
-        </div>
+        <div class="adr-field"><div class="adr-field-label">Context</div><p>Turning product requirements into reviewed code involved a lot of manual work breaking them down into tasks, implementing and reviewing.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Decision</div><p>Agent workflow with Claude Code: product requirements become specs and tasks; each spec generates its own branch with the code changes, which a developer reviews. The same spec drives AI-assisted code review, and a dedicated agent detects and reviews flaky tests.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Outcome</div><p>The spec as the single source of truth across the cycle, developers focused on reviewing and deciding, and less noise from unreliable tests.</p></div>
       </div>
-    </div>
-    <div class="adr">
-      <div class="adr-head">
-        <span class="adr-id">ADR-04 · Atrápalo / Drinks and Co</span>
-        <span class="adr-status">Completed</span>
-      </div>
-      <div class="adr-title">Progressive monolith refactor towards Domain-Driven Design</div>
+    </article>
+    <article class="adr">
+      <div class="adr-head"><span class="adr-id">ADR-04 · THN (The Hotels Network)</span><span class="adr-kind">AI</span></div>
+      <h3 class="adr-title">Product content generation with LLMs and RAG</h3>
       <div class="adr-body">
-        <div class="adr-field">
-          <div class="adr-field-label">Context</div>
-          <p>PHP 5 codebases, with business logic tightly coupled to infrastructure and framework code, with no clear boundaries between domains, made the product increasingly difficult to evolve and maintain as it grew.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Decision</div>
-          <p>Progressive process carried out alongside the PHP version migration (5 → 7 → 8): extracting business logic from infrastructure, identifying the natural bounded contexts within the monolith, and applying best practices and clean code (strict typing, removing dead code, reducing coupling) in each migrated module.</p>
-        </div>
-        <div class="adr-field">
-          <div class="adr-field-label">Outcome</div>
-          <p>Monolith incrementally transformed into a more domain-oriented, modular architecture, on a modern and maintainable codebase, without service downtime or a full rewrite.</p>
-        </div>
+        <div class="adr-field"><div class="adr-field-label">Context</div><p>New products were created with only their core data: generating the related content for each one by hand wasn&#x27;t feasible.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Decision</div><p>An LLM step in the product creation flow: once a product is persisted, an asynchronous worker builds prompts and uses RAG over its related data to generate that content, grounded in our own information rather than the model&#x27;s general knowledge.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Outcome</div><p>A new capability that didn&#x27;t exist before, without slowing down product creation and with retryable generation.</p></div>
       </div>
-    </div>
+    </article>
+    <article class="adr">
+      <div class="adr-head"><span class="adr-id">ADR-05 · Promofarma</span></div>
+      <h3 class="adr-title">CQRS + Event Sourcing in a high-volume system</h3>
+      <div class="adr-body">
+        <div class="adr-field"><div class="adr-field-label">Context</div><p>Complex business domains with high transaction volume needed to clearly separate reads and writes to maintain consistency without query bottlenecks.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Decision</div><p>Domain modeling with Domain-Driven Design and CQRS implementation, with asynchronous service-to-service communication via Kafka within a microservices-oriented architecture.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Outcome</div><p>Guaranteed data traceability, with reads and writes scaled independently.</p></div>
+      </div>
+    </article>
+    <article class="adr">
+      <div class="adr-head"><span class="adr-id">ADR-06 · Atrápalo / Drinks and Co</span></div>
+      <h3 class="adr-title">Progressive monolith refactor towards Domain-Driven Design</h3>
+      <div class="adr-body">
+        <div class="adr-field"><div class="adr-field-label">Context</div><p>PHP 5 codebases, with business logic tightly coupled to infrastructure and framework code, with no clear boundaries between domains, made the product increasingly difficult to evolve and maintain as it grew.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Decision</div><p>Progressive process carried out alongside the PHP version migration (5 → 7 → 8): extracting business logic from infrastructure, identifying the natural bounded contexts within the monolith, and applying best practices and clean code (strict typing, removing dead code, reducing coupling) in each migrated module.</p></div>
+        <div class="adr-field"><div class="adr-field-label">Outcome</div><p>Monolith incrementally transformed into a more domain-oriented, modular architecture, on a modern and maintainable codebase, without service downtime or a full rewrite.</p></div>
+      </div>
+    </article>
   </div>
 </section>
 
-<section class="mentor-section" id="mentoring">
+<section id="mentoring">
   <div class="wrap">
     <div class="section-label">Team</div>
-    <div class="section-title">Technical mentoring</div>
+    <h2 class="section-title">Technical mentoring</h2>
     <div class="mentor-box">
-      <div class="mentor-icon">M</div>
+      <div class="mentor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="7" r="3"/><path d="M2.5 20v-1.5A4.5 4.5 0 0 1 7 14h2a4.5 4.5 0 0 1 4.5 4.5V20"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.2h1.8a3.7 3.7 0 0 1 3.7 3.7V20"/></svg></div>
       <div>
         <h3>Supporting developers through DDD, hexagonal and CQRS adoption</h3>
-        <p>At THN, part of the role has involved helping the team internalize the codebase's architectural patterns: reviewing bounded-context designs with more junior developers, explaining the "why" behind conventions audited by Claude Code agents, and supporting the team through the progressive migration to PHPStan level 9. The goal isn't just for code to pass review, but for the team to understand the reasoning behind it.</p>
+        <p>At THN, part of my role involved helping the team internalize the codebase&#x27;s architectural patterns: reviewing bounded-context designs with more junior developers and explaining the &quot;why&quot; behind the conventions audited by the Claude Code agents. The goal wasn&#x27;t just for code to pass review, but for the team to understand the reasoning behind it.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="timeline-section" id="career">
+<section id="career">
   <div class="wrap">
     <div class="section-label">Career</div>
-    <div class="section-title">10+ years building backend systems</div>
-
+    <h2 class="section-title">10+ years of software engineering</h2>
+    
     <div class="tl-item">
-      <div class="tl-date">2021 — present</div>
-      <div>
-        <div class="tl-role">Senior Backend Developer</div>
-        <div class="tl-company">THN (The Hotels Network) — acquired by Lighthouse</div>
-        <div class="tl-desc">DDD, hexagonal architecture, CQRS, Event Sourcing per bounded context. Kafka, AWS SQS, MongoDB, Redis, S3. Kubernetes/EKS, Helm, CircleCI. Designed Claude Code agents for review and conventions.</div>
-      </div>
+      <div class="tl-date">2021 — 2026</div>
+      <div><div class="tl-role">Senior Backend Developer</div><div class="tl-company">THN (The Hotels Network) — acquired by Lighthouse</div><div class="tl-desc">DDD, hexagonal architecture, CQRS and Event Sourcing per bounded context. Event-driven architecture with Kafka and AWS SQS. MongoDB, Redis, S3. Kubernetes/EKS, Helm, CircleCI. Claude Code agents, spec-driven workflow and content generation with LLMs and RAG.</div></div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2020 — 2021</div>
-      <div>
-        <div class="tl-role">Backend Developer</div>
-        <div class="tl-company">Promofarma</div>
-        <div class="tl-desc">CQRS and Event Sourcing in a high-volume system. DDD applied to complex domains. Microservices with Kafka.</div>
-      </div>
+      <div><div class="tl-role">Backend Developer</div><div class="tl-company">Promofarma</div><div class="tl-desc">CQRS and Event Sourcing in a high-volume system. DDD applied to complex domains. Microservices with Kafka.</div></div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2019 — 2020</div>
-      <div>
-        <div class="tl-role">Backend Developer</div>
-        <div class="tl-company">Drinks and Co</div>
-        <div class="tl-desc">PHP/Symfony. MySQL, MongoDB, RabbitMQ. Refactored business modules towards Domain-Driven Design alongside the PHP 7 to 8 migration, applying best practices and clean code.</div>
-      </div>
+      <div><div class="tl-role">Backend Developer</div><div class="tl-company">Drinks and Co</div><div class="tl-desc">PHP/Symfony. MySQL, MongoDB, RabbitMQ. Refactored business modules towards Domain-Driven Design alongside the PHP 7 to 8 migration, applying best practices and clean code.</div></div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2018 — 2019</div>
-      <div>
-        <div class="tl-role">Backend Developer</div>
-        <div class="tl-company">Colvin</div>
-        <div class="tl-desc">CQRS and Event Sourcing to separate reads and writes with a reliable change history.</div>
-      </div>
+      <div><div class="tl-role">Backend Developer</div><div class="tl-company">Colvin</div><div class="tl-desc">CQRS and Event Sourcing to separate reads and writes with a reliable change history.</div></div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2016 — 2018</div>
-      <div>
-        <div class="tl-role">Full Stack Developer</div>
-        <div class="tl-company">Atrápalo — Leisure</div>
-        <div class="tl-desc">DDD principles applied to flight-department APIs. RabbitMQ. Progressive monolith refactor towards Domain-Driven Design alongside the PHP 5 to 7 migration: separating domain from infrastructure, bounded contexts and clean code.</div>
-      </div>
+      <div><div class="tl-role">Full Stack Developer</div><div class="tl-company">Atrápalo — Leisure</div><div class="tl-desc">DDD principles applied to flight-department APIs. RabbitMQ. Progressive monolith refactor towards Domain-Driven Design alongside the PHP 5 to 7 migration: separating domain from infrastructure, bounded contexts and clean code.</div></div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2012 — 2016</div>
-      <div>
-        <div class="tl-role">Front-End / Full Stack</div>
-        <div class="tl-company">Underbike · Fujitsu Spain · IN2 · Consulnet · Espais Telemàtics</div>
-        <div class="tl-desc">AngularJS, Java, PHP. Early career in consulting and a start-up.</div>
-      </div>
+      <div><div class="tl-role">Front-End / Full Stack</div><div class="tl-company">Underbike · Fujitsu Spain · IN2 · Consulnet · Espais Telemàtics</div><div class="tl-desc">AngularJS, Java, PHP. Early career in consulting and a start-up.</div></div>
     </div>
   </div>
 </section>
 
-<section class="skills-section">
+<section>
   <div class="wrap">
     <div class="section-label">Stack</div>
-    <div class="section-title">Technical skills</div>
-    <div class="skills-grid">
-      <div class="skill-cat">
-        <div class="skill-cat-label">Architecture</div>
-        <div class="skill-items">
-          <span class="skill-chip">DDD</span><span class="skill-chip">Hexagonal</span><span class="skill-chip">CQRS</span><span class="skill-chip">Event Sourcing</span><span class="skill-chip">Bounded Contexts</span><span class="skill-chip">Microservices</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-label">Languages and frameworks</div>
-        <div class="skill-items">
-          <span class="skill-chip">PHP 8.3+</span><span class="skill-chip">Symfony</span><span class="skill-chip">TypeScript</span><span class="skill-chip">Java</span><span class="skill-chip">Go</span><span class="skill-chip">GraphQL</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-label">Messaging and streaming</div>
-        <div class="skill-items">
-          <span class="skill-chip">Symfony Messenger</span><span class="skill-chip">Apache Kafka</span><span class="skill-chip">AWS SQS</span><span class="skill-chip">RabbitMQ</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-label">Data and storage</div>
-        <div class="skill-items">
-          <span class="skill-chip">MongoDB</span><span class="skill-chip">MySQL</span><span class="skill-chip">Elasticsearch</span><span class="skill-chip">Redis</span><span class="skill-chip">AWS S3</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-label">Cloud and infrastructure</div>
-        <div class="skill-items">
-          <span class="skill-chip">AWS</span><span class="skill-chip">Kubernetes</span><span class="skill-chip">EKS</span><span class="skill-chip">Docker</span><span class="skill-chip">Helm</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-label">CI/CD, quality and AI</div>
-        <div class="skill-items">
-          <span class="skill-chip">CircleCI</span><span class="skill-chip">PHPStan L9</span><span class="skill-chip">Datadog</span><span class="skill-chip">LaunchDarkly</span><span class="skill-chip">Claude Code</span>
-        </div>
-      </div>
-    </div>
+    <h2 class="section-title">Technical skills</h2>
+    <div class="skills-grid"><div class="skill-cat"><div class="skill-cat-label">Architecture</div><div class="skill-items"><span class="skill-chip">DDD</span><span class="skill-chip">Hexagonal</span><span class="skill-chip">CQRS</span><span class="skill-chip">Event Sourcing</span><span class="skill-chip">Event-driven</span><span class="skill-chip">Bounded Contexts</span><span class="skill-chip">Microservices</span></div></div><div class="skill-cat"><div class="skill-cat-label">Languages</div><div class="skill-items"><span class="skill-chip">PHP</span><span class="skill-chip">Python</span><span class="skill-chip">TypeScript</span><span class="skill-chip">Java</span><span class="skill-chip">Go</span><span class="skill-chip">GraphQL</span></div></div><div class="skill-cat"><div class="skill-cat-label">Frontend</div><div class="skill-items"><span class="skill-chip">JavaScript</span><span class="skill-chip">TypeScript</span><span class="skill-chip">Vue</span><span class="skill-chip">AngularJS</span><span class="skill-chip">Backbone</span></div></div><div class="skill-cat"><div class="skill-cat-label">Messaging and streaming</div><div class="skill-items"><span class="skill-chip">Symfony Messenger</span><span class="skill-chip">Apache Kafka</span><span class="skill-chip">AWS SQS</span><span class="skill-chip">RabbitMQ</span></div></div><div class="skill-cat"><div class="skill-cat-label">Data and storage</div><div class="skill-items"><span class="skill-chip">PostgreSQL</span><span class="skill-chip">MySQL</span><span class="skill-chip">MongoDB</span><span class="skill-chip">Elasticsearch</span><span class="skill-chip">Redis</span><span class="skill-chip">AWS S3</span></div></div><div class="skill-cat"><div class="skill-cat-label">Cloud and infrastructure</div><div class="skill-items"><span class="skill-chip">AWS</span><span class="skill-chip">Kubernetes</span><span class="skill-chip">EKS</span><span class="skill-chip">Docker</span><span class="skill-chip">Helm</span></div></div><div class="skill-cat"><div class="skill-cat-label">CI/CD and quality</div><div class="skill-items"><span class="skill-chip">CircleCI</span><span class="skill-chip">GitLab</span><span class="skill-chip">Jenkins</span><span class="skill-chip">PHPStan L9</span><span class="skill-chip">PHP CS Fixer</span><span class="skill-chip">Datadog</span><span class="skill-chip">LaunchDarkly</span></div></div><div class="skill-cat"><div class="skill-cat-label">Testing</div><div class="skill-items"><span class="skill-chip">PHPUnit</span><span class="skill-chip">Pest</span><span class="skill-chip">Codeception</span><span class="skill-chip">Behat</span><span class="skill-chip">JUnit</span><span class="skill-chip">Cypress</span></div></div><div class="skill-cat wide"><div class="skill-cat-label">Applied AI</div><div class="skill-items"><span class="skill-chip">Claude Code: skills, commands and agents</span><span class="skill-chip">MCP</span><span class="skill-chip">AI API integration</span><span class="skill-chip">RAG</span><span class="skill-chip">Spec-driven workflows</span></div></div></div>
   </div>
 </section>
 
@@ -494,9 +218,11 @@
     <p>Available remote or hybrid · Barcelona (08035)</p>
     <div class="contact-row">
       <a href="mailto:laurariera9@gmail.com" class="btn btn-primary">→ laurariera9@gmail.com</a>
-      <a href="tel:669954889" class="btn">669 954 889</a>
+      <a href="tel:+34669954889" class="btn">669 954 889</a>
+      <a href="https://www.linkedin.com/in/laurarv/" class="btn" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg> LinkedIn</a>
+      <a href="https://github.com/laurabcn" class="btn" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.9 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .31.22.69.83.57A12 12 0 0 0 12 .3"/></svg> GitHub</a>
     </div>
-    <div class="footer-meta">Catalan and Spanish (native) · English (B1)</div>
+    <div class="footer-meta">Catalan and Spanish (native) · English (B2)</div>
   </div>
 </footer>
 
